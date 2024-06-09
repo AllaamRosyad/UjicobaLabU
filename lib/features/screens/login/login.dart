@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 
 // Constants
 import 'package:t_store/utils/constants/image_strings.dart';
@@ -44,53 +45,67 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ],
               ),
+
               //Form
               Form(
+                  child: Padding(
+                padding: const EdgeInsets.symmetric(
+                    vertical: TSizes.spaceBtwSections),
                 child: Column(
                   children: [
+                    ///Email
                     TextFormField(
                       decoration: InputDecoration(
-                        labelText: TTexts.email,
-                        border: OutlineInputBorder(),
-                      ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return;
-                        }
-                        return null;
-                      },
+                          prefixIcon: Icon(Iconsax.direct_right),
+                          labelText: TTexts.email),
                     ),
-                    SizedBox(height: TSizes.sm),
+                    SizedBox(height: TSizes.spaceBtwInputFields),
+
+                    ///Password
                     TextFormField(
-                      obscureText: true,
                       decoration: InputDecoration(
-                        labelText: TTexts.password,
-                        border: OutlineInputBorder(),
+                          prefixIcon: Icon(Iconsax.password_check),
+                          labelText: TTexts.password,
+                          suffixIcon: Icon(Iconsax.eye_slash)),
+                    ),
+                    SizedBox(height: TSizes.spaceBtwInputFields / 2),
+
+                    ///Remember Me & Forget Password
+                    Row(children: [
+                      /// Remember Me
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Checkbox(value: true, onChanged: (value) {}),
+                          Text(TTexts.rememberMe),
+                        ],
                       ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return;
-                        }
-                        return null;
-                      },
-                    ),
-                    SizedBox(height: TSizes.md),
-                    ElevatedButton(
-                      onPressed: () {
-                        // Add login functionality here
-                      },
-                      child: Text(TTexts.signIn),
-                    ),
-                    SizedBox(height: TSizes.sm),
-                    TextButton(
-                      onPressed: () {
-                        // Add forgot password functionality here
-                      },
-                      child: Text(TTexts.forgetPassword),
-                    ),
+
+                      ///Forgot Password
+                      TextButton(
+                          onPressed: () {}, child: Text(TTexts.forgetPassword))
+                    ]),
+                    SizedBox(height: TSizes.spaceBtwInputFields),
+
+                    ///Sign In Button
+                    SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                            onPressed: () {}, child: Text(TTexts.signIn))),
+                    SizedBox(height: TSizes.spaceBtwItems),
+
+                    ///Create account button
+                    SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                            onPressed: () {},
+                            child: OutlinedButton(
+                                onPressed: () {},
+                                child: Text(TTexts.createAccount)))),
+                    SizedBox(height: TSizes.spaceBtwSections),
                   ],
                 ),
-              ),
+              )),
             ],
           ),
         ),
