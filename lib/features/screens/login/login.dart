@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:t_store/features/screens/login/widgets/login_form.dart';
+import 'package:t_store/features/screens/login/widgets/login_header.dart';
+import 'package:t_store/utils/constants/colors.dart';
 
 // Constants
 import 'package:t_store/utils/constants/image_strings.dart';
@@ -26,86 +30,70 @@ class LoginScreen extends StatelessWidget {
           child: Column(
             children: [
               /// Logo, Title & Sub-Title,
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              TLoginHeader(dark, context),
+
+              //Form
+              TLoginForm(),
+
+              ///Divider
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image(
-                    height: 150,
-                    image: AssetImage(
-                        dark ? TImages.lightAppLogo : TImages.darkAppLogo),
+                  Flexible(
+                    child: Divider(
+                      color: dark ? TColors.darkGrey : TColors.grey,
+                      thickness: 0.5,
+                      indent: 60,
+                      endIndent: 5,
+                    ),
                   ),
-                  Text(
-                    TTexts.loginTitle,
-                    style: Theme.of(context).textTheme.headlineMedium,
-                  ),
-                  SizedBox(height: TSizes.sm),
-                  Text(
-                    TTexts.loginSubTitle,
-                    style: Theme.of(context).textTheme.bodyMedium,
+                  Text(TTexts.orSignInWith.capitalize!,
+                      style: Theme.of(context).textTheme.labelMedium),
+                  Flexible(
+                    child: Divider(
+                      color: dark ? TColors.darkGrey : TColors.grey,
+                      thickness: 0.5,
+                      indent: 5,
+                      endIndent: 60,
+                    ),
                   ),
                 ],
               ),
+              SizedBox(height: TSizes.spaceBtwSections),
 
-              //Form
-              Form(
-                  child: Padding(
-                padding: const EdgeInsets.symmetric(
-                    vertical: TSizes.spaceBtwSections),
-                child: Column(
-                  children: [
-                    ///Email
-                    TextFormField(
-                      decoration: InputDecoration(
-                          prefixIcon: Icon(Iconsax.direct_right),
-                          labelText: TTexts.email),
+              ///Footer
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                        border: Border.all(color: TColors.grey),
+                        borderRadius: BorderRadius.circular(100)),
+                    child: IconButton(
+                        onPressed: () {},
+                        icon: Image(
+                          width: TSizes.iconMd,
+                          height: TSizes.iconMd,
+                          image: AssetImage(TImages.google),
+                        )),
+                  ),
+                  SizedBox(width: TSizes.spaceBtwItems),
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                    Container(
+                      decoration: BoxDecoration(
+                          border: Border.all(color: TColors.grey),
+                          borderRadius: BorderRadius.circular(100)),
+                      child: IconButton(
+                          onPressed: () {},
+                          icon: Image(
+                            width: TSizes.iconMd,
+                            height: TSizes.iconMd,
+                            image: AssetImage(TImages.facebook),
+                          )),
                     ),
-                    SizedBox(height: TSizes.spaceBtwInputFields),
-
-                    ///Password
-                    TextFormField(
-                      decoration: InputDecoration(
-                          prefixIcon: Icon(Iconsax.password_check),
-                          labelText: TTexts.password,
-                          suffixIcon: Icon(Iconsax.eye_slash)),
-                    ),
-                    SizedBox(height: TSizes.spaceBtwInputFields / 2),
-
-                    ///Remember Me & Forget Password
-                    Row(children: [
-                      /// Remember Me
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Checkbox(value: true, onChanged: (value) {}),
-                          Text(TTexts.rememberMe),
-                        ],
-                      ),
-
-                      ///Forgot Password
-                      TextButton(
-                          onPressed: () {}, child: Text(TTexts.forgetPassword))
-                    ]),
-                    SizedBox(height: TSizes.spaceBtwInputFields),
-
-                    ///Sign In Button
-                    SizedBox(
-                        width: double.infinity,
-                        child: ElevatedButton(
-                            onPressed: () {}, child: Text(TTexts.signIn))),
-                    SizedBox(height: TSizes.spaceBtwItems),
-
-                    ///Create account button
-                    SizedBox(
-                        width: double.infinity,
-                        child: ElevatedButton(
-                            onPressed: () {},
-                            child: OutlinedButton(
-                                onPressed: () {},
-                                child: Text(TTexts.createAccount)))),
-                    SizedBox(height: TSizes.spaceBtwSections),
-                  ],
-                ),
-              )),
+                  ])
+                ],
+              )
             ],
           ),
         ),

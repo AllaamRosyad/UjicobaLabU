@@ -25,7 +25,7 @@ class OnBoardingController extends GetxController {
     int nextPageIndex = currentPageIndex.value + 1;
     if (nextPageIndex > 2) {
       // Uncomment this if you have a LoginScreen
-      Get.to(LoginScreen());
+      Get.offAll(LoginScreen());
       print("Navigate to LoginScreen");
     } else {
       currentPageIndex.value = nextPageIndex;
