@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:t_store/features/authentication/screens/signup/signup.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/constants/text_strings.dart';
 
@@ -54,7 +57,8 @@ Form TLoginForm() {
             child: ElevatedButton(
                 onPressed: () {},
                 child: OutlinedButton(
-                    onPressed: () {}, child: Text(TTexts.createAccount)))),
+                    onPressed: () => Get.to(() => SignupScreen()),
+                    child: Text(TTexts.createAccount)))),
         SizedBox(height: TSizes.spaceBtwSections),
       ],
     ),
