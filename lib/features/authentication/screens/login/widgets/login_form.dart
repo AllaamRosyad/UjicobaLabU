@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:t_store/features/authentication/screens/password_configuration/forget_password.dart';
 import 'package:t_store/features/authentication/screens/signup/signup.dart';
+import 'package:t_store/navigation_menu.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/constants/text_strings.dart';
 
@@ -40,15 +42,18 @@ Form TLoginForm() {
           ),
 
           ///Forgot Password
-          TextButton(onPressed: () {}, child: Text(TTexts.forgetPassword))
+          TextButton(
+              onPressed: () => Get.to(() => const ForgetPassword()),
+              child: Text(TTexts.forgetPassword))
         ]),
         SizedBox(height: TSizes.spaceBtwInputFields),
 
         ///Sign In Button
         SizedBox(
             width: double.infinity,
-            child:
-                ElevatedButton(onPressed: () {}, child: Text(TTexts.signIn))),
+            child: ElevatedButton(
+                onPressed: () => Get.to(() => NavigationMenu()),
+                child: Text(TTexts.signIn))),
         SizedBox(height: TSizes.spaceBtwItems),
 
         ///Create account button
@@ -57,7 +62,7 @@ Form TLoginForm() {
             child: ElevatedButton(
                 onPressed: () {},
                 child: OutlinedButton(
-                    onPressed: () => Get.to(() => SignupScreen()),
+                    onPressed: () => Get.to(() => const SignupScreen()),
                     child: Text(TTexts.createAccount)))),
         SizedBox(height: TSizes.spaceBtwSections),
       ],

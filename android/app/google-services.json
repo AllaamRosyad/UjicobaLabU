@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "743413057469",
+    "project_id": "fir-auth-f5804",
+    "storage_bucket": "fir-auth-f5804.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:743413057469:android:417623146c4d8e2aa174d4",
+        "android_client_info": {
+          "package_name": "com.example.betatest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "743413057469-ipp35rl7p55p3ci7jenstqj6evpnb2e4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.betatest",
+            "certificate_hash": "72b56f81d2328a28d062e96514e347395044dfe7"
+          }
+        },
+        {
+          "client_id": "743413057469-3f8ogfg1s5l1ds2v0i7uoj4s1958riml.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLAOjz6xmEsWn3cD49OcioWyh8Kw9aoYk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "743413057469-06cot2oq0pgl75vk86sv5up5d68etnaa.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "743413057469-2d147ld667te3311db3imo3jgl46rmpo.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.smartlab"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:743413057469:android:fe0904c3d3b10bfea174d4",
+        "android_client_info": {
+          "package_name": "com.example.t_store"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "743413057469-go72g7feohbdpqjk63terquqf0h4o6ob.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.t_store",
+            "certificate_hash": "72b56f81d2328a28d062e96514e347395044dfe7"
+          }
+        },
+        {
+          "client_id": "743413057469-3f8ogfg1s5l1ds2v0i7uoj4s1958riml.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLAOjz6xmEsWn3cD49OcioWyh8Kw9aoYk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "743413057469-06cot2oq0pgl75vk86sv5up5d68etnaa.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "743413057469-2d147ld667te3311db3imo3jgl46rmpo.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.smartlab"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

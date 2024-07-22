@@ -30,6 +30,7 @@ class TImages {
       "assets/icons/categories/icons8-sparkling-diamond-64.png";
   static const String electronicsIcon =
       "assets/icons/categories/icons8-smartphone-64.png";
+  static const String libraryIcon = "assets/icons/categories/iconlemari.png";
 
   // -- Brand Icons
   static const String nikeLogo = "assets/icons/brands/nike.png";
@@ -57,6 +58,8 @@ class TImages {
       "assets/images/animations/sammy-line-man-receives-a-mail.png";
   static const String verifyIllustration =
       "assets/images/animations/sammy-line-travel-backpack-with-passport-and-air-ticket.gif";
+  static const String loadingScreen =
+      "assets/images/animations/loading-animation.json";
 
   // -- OnBoarding Texts
   static const String onBoardingImage1 =
