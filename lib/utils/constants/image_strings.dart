@@ -60,6 +60,8 @@ class TImages {
       "assets/images/animations/sammy-line-travel-backpack-with-passport-and-air-ticket.gif";
   static const String loadingScreen =
       "assets/images/animations/loading-animation.json";
+  static const String successfullyRegisterAnimation =
+      "assets/images/animations/72462-check-register.json";
 
   // -- OnBoarding Texts
   static const String onBoardingImage1 =
