@@ -1,27 +1,84 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:t_store/features/laboratorium/controllers/shimmer.dart';
 import 'package:t_store/utils/constants/colors.dart';
-import 'package:t_store/utils/constants/image_strings.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
 
+// class TCircularImage extends StatelessWidget {
+//   const TCircularImage({
+//     super.key,
+//     required this.image,
+//     this.fit = BoxFit.cover,
+//     this.isNetworkImage = false,
+//     this.overlayColor,
+//     this.backgroundColor,
+//     this.width = 56,
+//     this.height = 56,
+//     this.padding = TSizes.sm,
+//   });
+
+//   final BoxFit? fit;
+//   final String image;
+//   final bool isNetworkImage;
+//   final Color? overlayColor;
+//   final Color? backgroundColor;
+//   final double width, height, padding;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       width: width,
+//       height: height,
+//       padding: const EdgeInsets.all(TSizes.sm),
+//       decoration: BoxDecoration(
+//         /// If backgroun color is null then Switch it to light and dark mode color design
+//         color: backgroundColor ??
+//             (THelperFunctions.isDarkMode(context)
+//                 ? TColors.black
+//                 : TColors.white),
+//         borderRadius: BorderRadius.circular(100),
+//       ),
+//       child: ClipRRect(
+//         borderRadius: BorderRadius.circular(100),
+//         child: Center(
+//           child: isNetworkImage
+//               ? CachedNetworkImage(
+//                   imageUrl: image,
+//                   fit: fit,
+//                   color: overlayColor,
+//                   progressIndicatorBuilder: (context, url, downloadProgress) =>
+//                       TShimmerEffect(width: 55, height: 55, radius: 55),
+//                   errorWidget: (context, url, error) => Icon(Icons.error),
+//                 )
+//               : Image(
+//                   fit: fit,
+//                   image: AssetImage(image),
+//                   color: overlayColor,
+//                 ),
+//         ),
+//       ),
+//     );
+//   }
+// }
 class TCircularImage extends StatelessWidget {
   const TCircularImage({
     super.key,
-    this.fit = BoxFit.cover,
     required this.image,
+    this.fit = BoxFit.cover,
     this.isNetworkImage = false,
     this.overlayColor,
-    this.backgroundColor,
+    this.backgroundColor = Colors.transparent,
     this.width = 56,
     this.height = 56,
-    this.padding = TSizes.sm,
+    this.padding = 0,
   });
 
-  final BoxFit? fit;
+  final BoxFit fit;
   final String image;
   final bool isNetworkImage;
   final Color? overlayColor;
-  final Color? backgroundColor;
+  final Color backgroundColor;
   final double width, height, padding;
 
   @override
@@ -29,23 +86,27 @@ class TCircularImage extends StatelessWidget {
     return Container(
       width: width,
       height: height,
-      padding: EdgeInsets.all(TSizes.sm),
+      padding: EdgeInsets.all(padding),
       decoration: BoxDecoration(
-        /// If backgroun color is null then Switch it to light and dark mode color design
-        color: backgroundColor ??
-            (THelperFunctions.isDarkMode(context)
-                ? TColors.black
-                : TColors.white),
-        borderRadius: BorderRadius.circular(100),
+        color: backgroundColor,
+        shape: BoxShape.circle, // Ensures the container itself is circular
       ),
-      child: Center(
-        child: Image(
-          fit: fit,
-          image: isNetworkImage
-              ? NetworkImage(image)
-              : AssetImage(image) as ImageProvider,
-          color: overlayColor,
-        ),
+      child: ClipOval(
+        child: isNetworkImage
+            ? Image.network(
+                image,
+                fit: fit,
+                width: width,
+                height: height,
+                color: overlayColor,
+              )
+            : Image.asset(
+                image,
+                fit: fit,
+                width: width,
+                height: height,
+                color: overlayColor,
+              ),
       ),
     );
   }

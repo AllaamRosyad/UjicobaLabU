@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:t_store/bindings/general_bindings.dart';
-import 'package:t_store/features/authentication/screens/onboarding/onboarding.dart';
 import 'package:t_store/utils/constants/colors.dart';
-import 'package:t_store/utils/constants/text_strings.dart';
 import 'package:t_store/utils/theme/theme.dart';
 
 class App extends StatelessWidget {
@@ -20,7 +18,7 @@ class App extends StatelessWidget {
       initialBinding: GeneralBindings(),
 
       /// Show Loader or Circula Progres Indicator meanwhile Authentication Repository is deciding to show relevant screen
-      home: Scaffold(
+      home: const Scaffold(
           backgroundColor: TColors.primary,
           body: Center(child: CircularProgressIndicator(color: Colors.white))),
     );

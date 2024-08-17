@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:t_store/utils/loaders/loaders.dart';
@@ -26,7 +25,7 @@ class NetworkManager extends GetxController {
   Future<void> _updateConnectionStatus(ConnectivityResult result) async {
     _connectionStatus.value = result;
     if (_connectionStatus.value == ConnectivityResult.none) {
-      TLoaders.warningSnackBar(title: 'No Internet Connection');
+      TLoaders.customToast(message: 'No Internet Connection');
     }
   }
 
@@ -46,5 +45,11 @@ class NetworkManager extends GetxController {
   }
 
   /// Dispase or close the active connectivity stream.
+  @override
+  void onClose() {
+    super.onClose();
+    _connectivitySubscription.cancel();
+  }
+
   ///
 }

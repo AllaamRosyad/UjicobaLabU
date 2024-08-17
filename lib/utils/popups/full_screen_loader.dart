@@ -14,16 +14,16 @@ class TFullScreenLoader {
   /// - animation: the lottie animation to be shown.
   static void openLoadingDialog(String text, String animation) {
     showDialog(
-        context: Get.overlayContext!,
 
         ///Use Get.overlayContext for overlay dialogs
-        barrierDismissible: false,
+        context: Get.overlayContext!,
 
         /// The dialog can't be dismissed by tapping outside it
+        barrierDismissible: false,
+
+        /// Disable popping with the back button
         builder: (_) => PopScope(
             canPop: false,
-
-            /// Disable popping with the back button
             child: Container(
               color: THelperFunctions.isDarkMode(Get.context!)
                   ? TColors.dark
@@ -32,7 +32,7 @@ class TFullScreenLoader {
               height: double.infinity,
               child: Column(
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 250,
 
                     /// Adjust the spacing as needed

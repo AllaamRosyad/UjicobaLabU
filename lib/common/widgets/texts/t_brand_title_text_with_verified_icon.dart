@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
-import 'package:t_store/common/widgets/product_cart/product_card_vertical.dart';
 import 'package:t_store/common/widgets/texts/t_brand_title_text.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/enums.dart';
@@ -37,7 +35,7 @@ class TBrandTitleWithVerifiedIcon extends StatelessWidget {
             brandTextSize: brandTextSizes,
           ),
         ),
-        SizedBox(width: TSizes.xs),
+        const SizedBox(width: TSizes.xs),
         //Icon(Iconsax.verify5, color: TColors.primary, size: TSizes.iconXs)
       ],
     );

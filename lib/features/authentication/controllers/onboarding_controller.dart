@@ -75,7 +75,7 @@ class OnBoardingController extends GetxController {
         print(storage.read('IsFirstTime'));
       }
       storage.write('IsFirstTime', false);
-      Get.offAll(() => LoginScreen()); // Tambahkan () => untuk LoginScreen
+      Get.offAll(() => const LoginScreen()); // Tambahkan () => untuk LoginScreen
     } else {
       int page = currentPageIndex.value + 1;
       pageController.jumpToPage(page);
@@ -84,7 +84,7 @@ class OnBoardingController extends GetxController {
 
   // Update current index & jump to the last page
   void skipPage() {
-    Get.offAll(() => LoginScreen()); // Tambahkan () => untuk LoginScreen
+    Get.offAll(() => const LoginScreen()); // Tambahkan () => untuk LoginScreen
     currentPageIndex.value = 2;
     pageController.jumpToPage(2);
   }

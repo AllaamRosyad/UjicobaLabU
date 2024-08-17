@@ -85,9 +85,6 @@ import 'package:t_store/utils/formatters/formatter.dart';
 //   }
 // }
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:t_store/utils/formatters/formatter.dart';
-
 /// Model class representing user data
 class UserModel {
   // Keep those values final which you do not want to update

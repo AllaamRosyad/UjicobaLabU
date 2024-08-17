@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:t_store/common/styles/shadows.dart';
 import 'package:t_store/common/widgets/icons/t_circular_icon.dart';
 import 'package:t_store/common/widgets/images/t_rounded_image.dart';
 import 'package:t_store/common/widgets/texts/product_price_text.dart';
 import 'package:t_store/common/widgets/texts/product_title_text.dart';
-import 'package:t_store/common/widgets/texts/t_brand_title_text_with_verified_icon.dart';
 import 'package:t_store/features/laboratorium/screens/home/widgets/rounded_container.dart';
+import 'package:t_store/features/laboratorium/screens/product_details/product_detail.dart';
 import 'package:t_store/utils/constants/colors.dart';
-import 'package:t_store/utils/constants/enums.dart';
 import 'package:t_store/utils/constants/image_strings.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
@@ -22,10 +22,10 @@ class TProductCardVertical extends StatelessWidget {
 
     /// Container with side paddings, color, edges, radius and shadow.
     return GestureDetector(
-      onTap: () {},
+      onTap: () => Get.to(() => ProductDetailScreen()),
       child: Container(
         width: 180,
-        padding: EdgeInsets.all(1),
+        padding: const EdgeInsets.all(1),
         decoration: BoxDecoration(
           boxShadow: [TShadowStyle.verticalProductShadow],
           borderRadius: BorderRadius.circular(TSizes.productImageRadius),
@@ -36,12 +36,12 @@ class TProductCardVertical extends StatelessWidget {
             /// Thumbnail, Wishlist Button, Discount Tag
             TRoundedContainer(
                 height: 180,
-                padding: EdgeInsets.all(TSizes.sm),
+                padding: const EdgeInsets.all(TSizes.sm),
                 backgroundColor: dark ? TColors.dark : TColors.light,
                 child: Stack(
                   children: [
                     /// Thumbnail Image
-                    TRoundedImage(
+                    const TRoundedImage(
                         imageUrl: TImages.productImage1,
                         applyImageRadius: true),
 
@@ -51,7 +51,7 @@ class TProductCardVertical extends StatelessWidget {
                       child: TRoundedContainer(
                         radius: TSizes.sm,
                         backgroundColor: TColors.secondary.withOpacity(0.8),
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                             horizontal: TSizes.sm, vertical: TSizes.xs),
                         child: Text('25%',
                             style: Theme.of(context)
@@ -62,17 +62,17 @@ class TProductCardVertical extends StatelessWidget {
                     ),
 
                     /// Favorite Icon Button
-                    Positioned(
+                    const Positioned(
                         top: 0,
                         right: 0,
                         child: TCircularIcon(
                             icon: Iconsax.heart5, color: Colors.red)),
                   ],
                 )),
-            SizedBox(height: TSizes.spaceBtwItems / 2),
+            const SizedBox(height: TSizes.spaceBtwItems / 2),
 
             /// Details
-            Padding(
+            const Padding(
               padding: EdgeInsets.only(left: TSizes.sm),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,27 +85,27 @@ class TProductCardVertical extends StatelessWidget {
             ),
 
             /// Todo: Add Spacer() here to keep the height of each Box same in case 1 or 2 lines of Headings
-            Spacer(),
+            const Spacer(),
 
             /// Price Row
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 /// Price
-                Padding(
+                const Padding(
                   padding: EdgeInsets.only(left: TSizes.sm),
                   child: TProductPriceText(price: '35.0'),
                 ),
 
                 /// Add to Cart Button
                 Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       color: TColors.dark,
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(TSizes.cardRadiusMd),
                         bottomRight: Radius.circular(TSizes.productImageRadius),
                       )),
-                  child: SizedBox(
+                  child: const SizedBox(
                     width: TSizes.iconLg * 1.2,
                     height: TSizes.iconLg * 1.2,
                     child: Center(

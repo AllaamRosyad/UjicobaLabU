@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:t_store/features/laboratorium/screens/Inventory/Inventory.dart';
 import 'package:t_store/features/laboratorium/screens/home/home.dart';
+import 'package:t_store/features/laboratorium/screens/iot/led_screen.dart';
+import 'package:t_store/features/personalization/screens/settings/settings.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
 
@@ -25,7 +27,7 @@ class NavigationMenu extends StatelessWidget {
             indicatorColor: darkmode
                 ? TColors.white.withOpacity(0.1)
                 : TColors.black.withOpacity(0.1),
-            destinations: [
+            destinations: const [
               NavigationDestination(icon: Icon(Iconsax.home), label: 'Home'),
               NavigationDestination(
                   icon: Icon(Iconsax.shop), label: 'Inventory'),
@@ -43,9 +45,9 @@ class NavigationController extends GetxController {
   final Rx<int> selectedIndex = 0.obs;
 
   final screens = [
-    HomeScreen(),
-    Inventory(),
-    Container(color: Colors.orange),
-    Container(color: Colors.blue)
+    const HomeScreen(),
+    const Inventory(),
+    const LedControlScreen(),
+    const SettingsScreen(),
   ];
 }

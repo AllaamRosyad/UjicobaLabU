@@ -38,24 +38,24 @@ class Inventory extends StatelessWidget {
                     : TColors.white,
                 expandedHeight: 440,
                 flexibleSpace: Padding(
-                  padding: EdgeInsets.all(TSizes.defaultSpace),
+                  padding: const EdgeInsets.all(TSizes.defaultSpace),
                   child: ListView(
                     shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     children: [
                       /// Search Bar
-                      SizedBox(height: TSizes.spaceBtwItems),
-                      TSearchContainer(
+                      const SizedBox(height: TSizes.spaceBtwItems),
+                      const TSearchContainer(
                           text: '',
                           showBorder: true,
                           showBackground: false,
                           padding: EdgeInsets.zero),
-                      SizedBox(height: TSizes.spaceBtwSections),
+                      const SizedBox(height: TSizes.spaceBtwSections),
 
                       /// Featured Brand
                       TSectionHeading(
                           title: 'Featured Brands', onPressed: () {}),
-                      SizedBox(height: TSizes.spaceBtwItems / 1.5),
+                      const SizedBox(height: TSizes.spaceBtwItems / 1.5),
 
                       /// Brands Grid
                       TGridLayout(
@@ -65,7 +65,7 @@ class Inventory extends StatelessWidget {
                             return GestureDetector(
                               onTap: () {},
                               child: TRoundedContainer(
-                                padding: EdgeInsets.all(TSizes.sm),
+                                padding: const EdgeInsets.all(TSizes.sm),
                                 showBorder: true,
                                 backgroundColor: Colors.transparent,
                                 child: Row(
@@ -82,7 +82,8 @@ class Inventory extends StatelessWidget {
                                                   ? TColors.white
                                                   : TColors.black),
                                     ),
-                                    SizedBox(width: TSizes.spaceBtwItems / 2),
+                                    const SizedBox(
+                                        width: TSizes.spaceBtwItems / 2),
 
                                     /// Text
                                     Expanded(
@@ -91,7 +92,7 @@ class Inventory extends StatelessWidget {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          TBrandTitleWithVerifiedIcon(
+                                          const TBrandTitleWithVerifiedIcon(
                                               title: 'Lemari',
                                               brandTextSizes: TextSizes.large),
                                           Text(

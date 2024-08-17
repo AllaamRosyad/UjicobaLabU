@@ -47,31 +47,33 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDoF-WJKySDeBJL-0BZctFCLa--DOGiDA4',
-    appId: '1:743413057469:web:082b52e3de3e4dc9a174d4',
-    messagingSenderId: '743413057469',
-    projectId: 'fir-auth-f5804',
-    authDomain: 'fir-auth-f5804.firebaseapp.com',
-    storageBucket: 'fir-auth-f5804.appspot.com',
-    measurementId: 'G-W344F295Q9',
+    apiKey: 'AIzaSyCzaYCV28WXnxtapIe901lDpjHyqvI5KP8',
+    appId: '1:979792986083:web:f19933977e04ab5963ead6',
+    messagingSenderId: '979792986083',
+    projectId: 'testingapplabu',
+    authDomain: 'testingapplabu.firebaseapp.com',
+    databaseURL: 'https://testingapplabu-default-rtdb.firebaseio.com',
+    storageBucket: 'testingapplabu.appspot.com',
+    measurementId: 'G-G3J5N09EQE',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCLAOjz6xmEsWn3cD49OcioWyh8Kw9aoYk',
-    appId: '1:743413057469:android:fe0904c3d3b10bfea174d4',
-    messagingSenderId: '743413057469',
-    projectId: 'fir-auth-f5804',
-    storageBucket: 'fir-auth-f5804.appspot.com',
+    apiKey: 'AIzaSyCI4usR_P7NDJfsT4oStOe60KSV39iV6yc',
+    appId: '1:979792986083:android:00f4ed27ed2b6e7163ead6',
+    messagingSenderId: '979792986083',
+    projectId: 'testingapplabu',
+    databaseURL: 'https://testingapplabu-default-rtdb.firebaseio.com',
+    storageBucket: 'testingapplabu.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCfRl-b2ggbPHUjetm9GOklZ_SqxwM9zRw',
-    appId: '1:743413057469:ios:d26d6de0e2d8503ba174d4',
-    messagingSenderId: '743413057469',
-    projectId: 'fir-auth-f5804',
-    storageBucket: 'fir-auth-f5804.appspot.com',
-    androidClientId: '743413057469-go72g7feohbdpqjk63terquqf0h4o6ob.apps.googleusercontent.com',
-    iosClientId: '743413057469-snk38f8kkr46l5r8ieqrputrmebbde61.apps.googleusercontent.com',
+    apiKey: 'AIzaSyA8vVOjYZKoTTEMnPo-WUKbpDcymY1pJvs',
+    appId: '1:979792986083:ios:6f8c13e85fe24c4763ead6',
+    messagingSenderId: '979792986083',
+    projectId: 'testingapplabu',
+    databaseURL: 'https://testingapplabu-default-rtdb.firebaseio.com',
+    storageBucket: 'testingapplabu.appspot.com',
+    iosClientId: '979792986083-1uavdvmhs3e20goe1qhn198071oggcdb.apps.googleusercontent.com',
     iosBundleId: 'com.example.tStore',
   );
 

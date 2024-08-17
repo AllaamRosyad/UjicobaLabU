@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:t_store/utils/constants/colors.dart';
-import 'package:t_store/utils/constants/image_strings.dart';
 import 'package:lottie/lottie.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 
@@ -38,11 +37,11 @@ class TAnimationLoaderWidget extends StatelessWidget {
           Lottie.asset(animation,
               width: MediaQuery.of(context).size.width *
                   0.8), // Display Lottie Animation
-          SizedBox(height: TSizes.defaultSpace),
+          const SizedBox(height: TSizes.defaultSpace),
           Text(text,
               style: Theme.of(context).textTheme.bodyMedium,
               textAlign: TextAlign.center),
-          SizedBox(height: TSizes.defaultSpace),
+          const SizedBox(height: TSizes.defaultSpace),
           showAction
               ? SizedBox(
                   width: 250,
@@ -59,7 +58,7 @@ class TAnimationLoaderWidget extends StatelessWidget {
                     ),
                   ),
                 )
-              : SizedBox(),
+              : const SizedBox(),
         ],
       ),
     );

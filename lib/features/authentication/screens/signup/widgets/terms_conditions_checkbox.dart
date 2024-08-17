@@ -28,14 +28,14 @@ class TTermsAndConditionsCheckbox extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(
+        const SizedBox(
             width: 8), // Adding some space between the checkbox and the text
         Expanded(
           child: Text.rich(
             TextSpan(
               children: [
                 TextSpan(
-                  text: '${TTexts.iAgreeTo}',
+                  text: TTexts.iAgreeTo,
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
                 TextSpan(
@@ -47,7 +47,7 @@ class TTermsAndConditionsCheckbox extends StatelessWidget {
                       ),
                 ),
                 TextSpan(
-                  text: '${TTexts.and}',
+                  text: TTexts.and,
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
                 TextSpan(
