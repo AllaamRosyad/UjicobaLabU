@@ -1,9 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/material.dart';
-import 'package:t_store/features/laboratorium/controllers/shimmer.dart';
-import 'package:t_store/utils/constants/colors.dart';
-import 'package:t_store/utils/constants/sizes.dart';
-import 'package:t_store/utils/helpers/helper_functions.dart';
+// import 'package:cached_network_image/cached_network_image.dart';
+// import 'package:flutter/material.dart';
+// import 'package:t_store/features/laboratorium/controllers/shimmer.dart';
+// import 'package:t_store/utils/constants/colors.dart';
+// import 'package:t_store/utils/constants/sizes.dart';
+// import 'package:t_store/utils/helpers/helper_functions.dart';
 
 // class TCircularImage extends StatelessWidget {
 //   const TCircularImage({
@@ -61,6 +61,14 @@ import 'package:t_store/utils/helpers/helper_functions.dart';
 //     );
 //   }
 // }
+
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
+import 'package:t_store/common/widgets/shimmers/shimmer.dart';
+import 'package:t_store/utils/constants/colors.dart';
+import 'package:t_store/utils/constants/sizes.dart';
+import 'package:t_store/utils/helpers/helper_functions.dart';
+
 class TCircularImage extends StatelessWidget {
   const TCircularImage({
     super.key,
@@ -68,7 +76,7 @@ class TCircularImage extends StatelessWidget {
     this.fit = BoxFit.cover,
     this.isNetworkImage = false,
     this.overlayColor,
-    this.backgroundColor = Colors.transparent,
+    this.backgroundColor,
     this.width = 56,
     this.height = 56,
     this.padding = 0,
@@ -78,7 +86,7 @@ class TCircularImage extends StatelessWidget {
   final String image;
   final bool isNetworkImage;
   final Color? overlayColor;
-  final Color backgroundColor;
+  final Color? backgroundColor;
   final double width, height, padding;
 
   @override
@@ -88,23 +96,26 @@ class TCircularImage extends StatelessWidget {
       height: height,
       padding: EdgeInsets.all(padding),
       decoration: BoxDecoration(
-        color: backgroundColor,
+        /// If image background color is null then switch it to light and dark mode color design.
+        color: backgroundColor ??
+            (THelperFunctions.isDarkMode(context)
+                ? TColors.black
+                : TColors.white),
         shape: BoxShape.circle, // Ensures the container itself is circular
       ),
       child: ClipOval(
         child: isNetworkImage
-            ? Image.network(
-                image,
+            ? CachedNetworkImage(
+                imageUrl: image,
                 fit: fit,
-                width: width,
-                height: height,
                 color: overlayColor,
+                progressIndicatorBuilder: (context, url, downloadProgress) =>
+                    TShimmerEffect(width: 55, height: 55, radius: 55),
+                errorWidget: (context, url, error) => Icon(Icons.error),
               )
-            : Image.asset(
-                image,
+            : Image(
+                image: AssetImage(image),
                 fit: fit,
-                width: width,
-                height: height,
                 color: overlayColor,
               ),
       ),
