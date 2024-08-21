@@ -1,43 +1,12 @@
-// import 'package:flutter/material.dart';
-// import 'package:t_store/common/widgets/texts/product_title_text.dart';
-// import 'package:t_store/utils/constants/sizes.dart';
-// import 'package:t_store/utils/helpers/helper_functions.dart';
-
-// import 'package:flutter/material.dart';
-
-// class TProductData extends StatelessWidget {
-//   const TProductData({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     final darkmode = THelperFunctions.isDarkMode(context);
-//     return Row(
-//       children: [
-//         Column(
-//           crossAxisAlignment: CrossAxisAlignment.start,
-//           children: [
-//             // Title
-//             Text(
-//               'Green Nike Sport Shirt',
-//               style: TextStyle(
-//                 fontSize: 24,
-//                 fontWeight: FontWeight.bold,
-//               ),
-//             ),
-//             SizedBox(height: TSizes.spaceBtwItems),
-//           ],
-//         ),
-//       ],
-//     );
-//   }
-// }
-
 import 'package:flutter/material.dart';
+import 'package:t_store/features/laboratorium/models/product_model.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
 
 class TProductData extends StatelessWidget {
-  const TProductData({super.key});
+  const TProductData({Key? key, required this.product}) : super(key: key);
+
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
@@ -49,8 +18,8 @@ class TProductData extends StatelessWidget {
           children: [
             // Title
             Text(
-              'Green Nike Sport Shirt',
-              style: TextStyle(
+              product.title, // Use product's title
+              style: const TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
@@ -59,7 +28,7 @@ class TProductData extends StatelessWidget {
 
             // Stock Information
             Text(
-              'In Stock: 25 items',
+              'In Stock: ${product.stock} items', // Use product's stock
               style: TextStyle(
                 fontSize: 16,
                 color: darkmode ? Colors.white70 : Colors.black54,

@@ -127,13 +127,12 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:t_store/common/styles/shadows.dart';
 import 'package:t_store/common/widgets/images/t_rounded_image.dart';
+import 'package:t_store/common/widgets/product_cart/add_to_cart_button.dart';
 import 'package:t_store/common/widgets/texts/product_title_text.dart';
-import 'package:t_store/features/laboratorium/controllers/product_controller.dart';
 import 'package:t_store/features/laboratorium/models/product_model.dart';
 import 'package:t_store/features/laboratorium/screens/home/widgets/rounded_container.dart';
 import 'package:t_store/features/laboratorium/screens/product_details/product_detail.dart';
 import 'package:t_store/utils/constants/colors.dart';
-import 'package:t_store/utils/constants/image_strings.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
 
@@ -144,7 +143,6 @@ class TProductCardVertical extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = ProductController.instance;
     final dark = THelperFunctions.isDarkMode(context);
 
     return GestureDetector(
@@ -174,7 +172,7 @@ class TProductCardVertical extends StatelessWidget {
 
             /// Product Title
             Padding(
-              padding: EdgeInsets.only(left: TSizes.sm),
+              padding: const EdgeInsets.only(left: TSizes.sm),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -182,7 +180,7 @@ class TProductCardVertical extends StatelessWidget {
                     title: product.title,
                     smallSize: true,
                   ),
-                  SizedBox(height: TSizes.spaceBtwItems / 2),
+                  const SizedBox(height: TSizes.spaceBtwItems / 2),
                 ],
               ),
             ),
@@ -194,11 +192,11 @@ class TProductCardVertical extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 /// Stock Information (Replaced Price)
-                const Padding(
-                  padding: EdgeInsets.only(left: TSizes.sm),
+                Padding(
+                  padding: const EdgeInsets.only(left: TSizes.sm),
                   child: Text(
-                    'Stock: 35 items',
-                    style: TextStyle(
+                    'Stock: ${product.stock} items', // Use the stock from the product model
+                    style: const TextStyle(
                       fontSize: 14,
                       color: Colors.grey,
                     ),
@@ -206,22 +204,7 @@ class TProductCardVertical extends StatelessWidget {
                 ),
 
                 /// Add to Cart Button
-                Container(
-                  decoration: const BoxDecoration(
-                    color: TColors.dark,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(TSizes.cardRadiusMd),
-                      bottomRight: Radius.circular(TSizes.productImageRadius),
-                    ),
-                  ),
-                  child: const SizedBox(
-                    width: TSizes.iconLg * 1.2,
-                    height: TSizes.iconLg * 1.2,
-                    child: Center(
-                      child: Icon(Iconsax.add, color: TColors.white),
-                    ),
-                  ),
-                ),
+                ProductCardAddToCartButton(product: product),
               ],
             ),
           ],

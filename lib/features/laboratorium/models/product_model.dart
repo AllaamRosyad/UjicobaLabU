@@ -1,5 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+enum ProductType {
+  single,
+  variable,
+  // Add other product types if needed
+}
+
 class ProductModel {
   String id;
   String title;
@@ -8,6 +14,7 @@ class ProductModel {
   String? description;
   List<String>? images;
   bool? isFeatured;
+  ProductType productType;
 
   ProductModel({
     required this.id,
@@ -17,13 +24,17 @@ class ProductModel {
     this.images,
     this.description,
     this.isFeatured,
+    required this.productType,
   });
 
-  /// Create Empty func for clean code
   static ProductModel empty() => ProductModel(
-      id: '', title: 'No Title', stock: 0, thumbnail: 'No Thumbnail');
+        id: '',
+        title: 'No Title',
+        stock: 0,
+        thumbnail: 'No Thumbnail',
+        productType: ProductType.single, // Provide a default productType
+      );
 
-  /// Json Format
   toJson() {
     return {
       'Title': title,
@@ -32,16 +43,15 @@ class ProductModel {
       'Thumbnail': thumbnail,
       'IsFeatured': isFeatured ?? false,
       'Description': description ?? 'No Description',
+      'ProductType': productType.toString().split('.').last, // Store as string
     };
   }
 
-  /// Map Json oriented document snapshot from Firebase to Model
   factory ProductModel.fromSnapshot(
       DocumentSnapshot<Map<String, dynamic>> document) {
     if (document.data() == null) return ProductModel.empty();
     final data = document.data()!;
 
-    // Menangani 'Images' yang seharusnya List<String> tapi bisa saja string tunggal
     List<String> imagesList = [];
     if (data['Images'] is String) {
       imagesList = [data['Images'] as String];
@@ -49,10 +59,20 @@ class ProductModel {
       imagesList = List<String>.from(data['Images']);
     }
 
-    // Mengambil 'stock' sebagai int, jika sesuai dengan tipe yang ada di Firestore
     int stock = 0;
     if (data['Stock'] is int) {
       stock = data['Stock'];
+    }
+
+    // Safely parse ProductType from the snapshot
+    ProductType productType;
+    if (data['ProductType'] != null && data['ProductType'] is String) {
+      productType = ProductType.values.firstWhere(
+        (e) => e.toString().split('.').last == data['ProductType'],
+        orElse: () => ProductType.single, // Default value
+      );
+    } else {
+      productType = ProductType.single; // Default value if not provided
     }
 
     return ProductModel(
@@ -63,6 +83,7 @@ class ProductModel {
       thumbnail: data['Thumbnail'] ?? 'No Thumbnail',
       description: data['Description'] ?? 'No Description',
       images: imagesList,
+      productType: productType,
     );
   }
 }

@@ -49,7 +49,7 @@ class _InventoryState extends State<Inventory> {
         title: Text('Inventory',
             style: Theme.of(context).textTheme.headlineMedium),
         actions: [
-          TCartCounterIcon(onPressed: () {}),
+          TCartCounterIcon(),
         ],
       ),
       body: FutureBuilder<List<ProductModel>>(

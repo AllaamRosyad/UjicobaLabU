@@ -62,6 +62,8 @@ class TImages {
       "assets/images/animations/loading-animation.json";
   static const String successfullyRegisterAnimation =
       "assets/images/animations/72462-check-register.json";
+  static const String cartAnimation =
+      "assets/images/animations/53207-empty-file.json";
 
   // -- OnBoarding Texts
   static const String onBoardingImage1 =
