@@ -26,6 +26,7 @@ class TCartItem extends StatelessWidget {
           imageUrl: cartItem.image ?? '',
           width: 60,
           height: 60,
+          isNetworkImage: true,
           padding: EdgeInsets.all(TSizes.sm),
           backgroundColor: THelperFunctions.isDarkMode(context)
               ? TColors.darkerGrey
@@ -36,24 +37,13 @@ class TCartItem extends StatelessWidget {
         /// Title, Price & Size
         Expanded(
           child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Flexible(
-                child: TProductTitleText(title: cartItem.title, maxLines: 1),
-              ),
-
-              /// Attributes
-              Text.rich(TextSpan(children: [
-                TextSpan(
-                    text: 'Color  ',
-                    style: Theme.of(context).textTheme.bodySmall),
-                TextSpan(
-                    text: 'Green ',
-                    style: Theme.of(context).textTheme.bodyLarge),
-              ]))
-            ],
-          ),
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Flexible(
+                  child: TProductTitleText(title: cartItem.title, maxLines: 1),
+                ),
+              ]),
         )
       ],
     );

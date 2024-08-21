@@ -47,7 +47,7 @@ class CartScreen extends StatelessWidget {
               padding: EdgeInsets.all(TSizes.defaultSpace),
 
               /// Items in cart
-              child: TCartItem(),
+              child: TCartItems(),
             ),
           );
         }
@@ -55,11 +55,10 @@ class CartScreen extends StatelessWidget {
 
       /// Checkout Button
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(TSizes.defaultSpace),
-        child: ElevatedButton(
-            onPressed: () => Get.to(() => CheckoutScreen()),
-            child: Text('Peminjaman')),
-      ),
+          padding: const EdgeInsets.all(TSizes.defaultSpace),
+          child: ElevatedButton(
+              onPressed: () => Get.to(() => CheckoutScreen()),
+              child: Text('Peminjaman'))),
     );
   }
 }

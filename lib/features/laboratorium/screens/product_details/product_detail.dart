@@ -128,7 +128,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     final images = controller.getAllProductImages(widget.product);
     final dark = THelperFunctions.isDarkMode(context);
     return Scaffold(
-      bottomNavigationBar: TBottomAddToCart(),
+      bottomNavigationBar: TBottomAddToCart(product: widget.product),
       body: SingleChildScrollView(
         child: Column(
           children: [
