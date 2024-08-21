@@ -76,6 +76,7 @@
 import 'package:flutter/material.dart';
 import 'package:readmore/readmore.dart';
 import 'package:t_store/common/widgets/section_heading/section_heading.dart';
+import 'package:t_store/features/laboratorium/models/product_model.dart';
 import 'package:t_store/features/laboratorium/screens/product_details/widgets/bottom_add_to_cart.dart'; // Re-import the bottom navigation widget
 import 'package:t_store/features/laboratorium/screens/product_details/widgets/product_data.dart';
 import 'package:t_store/features/laboratorium/screens/product_details/widgets/product_image.dart';
@@ -84,7 +85,9 @@ import 'package:t_store/utils/helpers/helper_functions.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 class ProductDetailScreen extends StatefulWidget {
-  const ProductDetailScreen({super.key});
+  const ProductDetailScreen({super.key, required this.product});
+
+  final ProductModel product;
 
   @override
   _ProductDetailScreenState createState() => _ProductDetailScreenState();

@@ -12,32 +12,35 @@ class BannerController extends GetxController {
 
   @override
   void onInit() {
-    fetchBanners();
+    fetchBanners(); // Memanggil fetchBanners saat inisialisasi
     super.onInit();
-  }
-
-  /// Update Page Navigational Dots
-  void updatePageIndicator(index) {
-    carousalCurrentIndex.value = index;
   }
 
   /// Fetch Banners
   Future<void> fetchBanners() async {
     try {
-      /// Show loader while loading categories
       isLoading.value = true;
 
-      /// Fetch Banners
+      // Code to fetch data from Firestore
       final bannerRepo = Get.put(BannerRepository());
-      final banners = await bannerRepo.fetchBanners();
+      final fetchedBanners = await bannerRepo.fetchBanners();
 
-      /// Assign Banners
-      this.banners.assignAll(banners);
+      // Tambahkan perintah print di sini untuk debugging
+      print(
+          "Fetched banners: ${fetchedBanners.map((e) => e.imageUrl).toList()}");
+
+      banners.assignAll(fetchedBanners);
     } catch (e) {
+      // Tangani kesalahan dan tampilkan pesan kesalahan kepada pengguna
+      print("Firebase error: $e"); // Tambahkan log untuk melihat kesalahan
       TLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
     } finally {
-      /// Remove Loader
-      isLoading.value = false;
+      isLoading.value = false; // Pastikan indikator loading diatur kembali
     }
+  }
+
+  /// Update Page Navigational Dots
+  void updatePageIndicator(index) {
+    carousalCurrentIndex.value = index;
   }
 }

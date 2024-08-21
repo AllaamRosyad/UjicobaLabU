@@ -89,11 +89,14 @@
 //   }
 // }
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:t_store/common/widgets/custom_shapes/containers/primary_header_container.dart';
 import 'package:t_store/common/widgets/custom_shapes/containers/search_container.dart';
 import 'package:t_store/common/widgets/layouts/grid_layout.dart';
 import 'package:t_store/common/widgets/product_cart/product_card_vertical.dart';
+import 'package:t_store/common/widgets/shimmers/vertical_product_shimmer.dart';
 import 'package:t_store/common/widgets/texts/section_heading.dart';
+import 'package:t_store/features/laboratorium/controllers/product_controller.dart';
 import 'package:t_store/features/laboratorium/screens/home/widgets/home_appbar.dart';
 import 'package:t_store/features/laboratorium/screens/home/widgets/promo_slider.dart';
 import 'package:t_store/utils/constants/image_strings.dart';
@@ -104,6 +107,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(ProductController());
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -139,9 +143,20 @@ class HomeScreen extends StatelessWidget {
                   const SizedBox(height: TSizes.spaceBtwItems),
 
                   /// Popular Product
-                  TGridLayout(
-                      itemCount: 4,
-                      itemBuilder: (_, index) => const TProductCardVertical()),
+                  Obx(() {
+                    if (controller.isLoading.value)
+                      return TVerticalProductShimmer();
+                    if (controller.featuredProducts.isEmpty) {
+                      return Center(
+                        child: Text('No Data Found',
+                            style: Theme.of(context).textTheme.bodyMedium),
+                      );
+                    }
+                    return TGridLayout(
+                        itemCount: controller.featuredProducts.length,
+                        itemBuilder: (_, index) => TProductCardVertical(
+                            product: controller.featuredProducts[index]));
+                  }),
                 ],
               ),
             ),

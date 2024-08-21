@@ -15,13 +15,13 @@ import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
 
 class CartScreen extends StatelessWidget {
-  const CartScreen({Key? key}) : super(key: key);
-
+  const CartScreen({Key? key, this.showBackArrow = false}) : super(key: key);
+  final bool showBackArrow;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: TAppBar(
-        showBackArrow: true,
+        showBackArrow: showBackArrow,
         title: Text('Cart', style: Theme.of(context).textTheme.headlineSmall),
       ),
       body: Padding(

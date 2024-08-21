@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:t_store/features/laboratorium/models/banner_model.dart';
@@ -13,24 +12,25 @@ class BannerRepository extends GetxController {
   /// Variables
   final _db = FirebaseFirestore.instance;
 
-  /// Get all order related
+  /// Fetch Banners
   Future<List<BannerModel>> fetchBanners() async {
     try {
       final result = await _db
           .collection('Banners')
-          .where('active', isEqualTo: true)
+          .where('Active', isEqualTo: true)
           .get();
-      return result.docs
-          .map((DocumentSnapshot) => BannerModel.fromSnapshot(DocumentSnapshot))
-          .toList();
-    } on TFirebaseException catch (e) {
-      throw TFirebaseException(e.code).message;
-    } on FormatException catch (_) {
-      throw const TFormatException();
-    } on PlatformException catch (e) {
-      throw TPlatformException(e.code).message;
+
+      final banners =
+          result.docs.map((doc) => BannerModel.fromSnapshot(doc)).toList();
+
+      // Tambahkan perintah print di sini untuk debugging
+      print("Fetched banners: ${banners.map((e) => e.imageUrl).toList()}");
+
+      return banners;
     } catch (e) {
-      throw 'Something went wrong, Please try again';
+      // Tangani kesalahan dan tampilkan pesan kesalahan kepada pengguna
+      print("Firebase error: $e"); // Tambahkan log untuk melihat kesalahan
+      throw 'Something went wrong, Please try again'; // Buang kesalahan ke Controller
     }
   }
 }

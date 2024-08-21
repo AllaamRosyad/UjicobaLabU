@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:t_store/features/laboratorium/screens/Inventory/Inventory.dart';
+import 'package:t_store/features/laboratorium/screens/cart/cart.dart';
 import 'package:t_store/features/laboratorium/screens/home/home.dart';
 import 'package:t_store/features/laboratorium/screens/iot/led_screen.dart';
 import 'package:t_store/features/personalization/screens/settings/settings.dart';
@@ -44,10 +45,10 @@ class NavigationMenu extends StatelessWidget {
 class NavigationController extends GetxController {
   final Rx<int> selectedIndex = 0.obs;
 
-  final screens = [
+  final List<Widget> screens = [
     const HomeScreen(),
     const Inventory(),
-    const LedControlScreen(),
+    const CartScreen(),
     const SettingsScreen(),
   ];
 }

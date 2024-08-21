@@ -1,97 +1,104 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:t_store/common/widgets/appbar/appbar.dart';
-import 'package:t_store/common/widgets/appbar/tabbar.dart';
-import 'package:t_store/common/widgets/brand/brand_card.dart';
-import 'package:t_store/common/widgets/brand/brand_show_case.dart';
 import 'package:t_store/common/widgets/custom_shapes/containers/search_container.dart';
-import 'package:t_store/common/widgets/images/t_circular_image.dart';
 import 'package:t_store/common/widgets/layouts/grid_layout.dart';
 import 'package:t_store/common/widgets/product_cart/cart_menu_icon.dart';
-import 'package:t_store/common/widgets/texts/section_heading.dart';
-import 'package:t_store/common/widgets/texts/t_brand_title_text_with_verified_icon.dart';
-import 'package:t_store/features/laboratorium/controllers/category_controller.dart';
-import 'package:t_store/features/laboratorium/screens/Inventory/widgets/category_tab.dart';
-import 'package:t_store/features/laboratorium/screens/home/widgets/rounded_container.dart';
-import 'package:t_store/utils/constants/colors.dart';
-import 'package:t_store/utils/constants/enums.dart';
-import 'package:t_store/utils/constants/image_strings.dart';
+import 'package:t_store/common/widgets/product_cart/product_card_vertical.dart';
+import 'package:t_store/features/laboratorium/models/product_model.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
 
-class Inventory extends StatelessWidget {
+class Inventory extends StatefulWidget {
   const Inventory({super.key});
 
   @override
+  _InventoryState createState() => _InventoryState();
+}
+
+class _InventoryState extends State<Inventory> {
+  late Future<List<ProductModel>> _futureProducts;
+
+  @override
+  void initState() {
+    super.initState();
+    _futureProducts =
+        _fetchProducts(); // Fetch products when the widget initializes
+  }
+
+  Future<List<ProductModel>> _fetchProducts() async {
+    try {
+      print('Fetching products from Firestore...');
+      final snapshot =
+          await FirebaseFirestore.instance.collection('Products').get();
+      print('Products fetched: ${snapshot.docs.length}');
+      return snapshot.docs.map((doc) {
+        print('Document data: ${doc.data()}');
+        return ProductModel.fromSnapshot(doc);
+      }).toList();
+    } catch (e) {
+      print('Error fetching products: $e');
+      return [];
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final categories = CategoryController.instance.featuredCategories;
-    return DefaultTabController(
-      length: categories.length,
-      child: Scaffold(
-
-          /// Appbar
-          appBar: TAppBar(
-            title: Text('Inventory',
-                style: Theme.of(context).textTheme.headlineMedium),
-            actions: [
-              TCartCounterIcon(onPressed: () {}),
-            ],
-          ),
-          body: NestedScrollView(
-
-              /// Header
-              headerSliverBuilder: (_, innerBoxIsScrolled) {
-                return [
-                  SliverAppBar(
-                    automaticallyImplyLeading: false,
-                    pinned: true,
-                    floating: true,
-                    backgroundColor: THelperFunctions.isDarkMode(context)
-                        ? TColors.black
-                        : TColors.white,
-                    expandedHeight: 440,
-                    flexibleSpace: Padding(
-                      padding: const EdgeInsets.all(TSizes.defaultSpace),
-                      child: ListView(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        children: [
-                          /// Search Bar
-                          const SizedBox(height: TSizes.spaceBtwItems),
-                          const TSearchContainer(
-                              text: '',
-                              showBorder: true,
-                              showBackground: false,
-                              padding: EdgeInsets.zero),
-                          const SizedBox(height: TSizes.spaceBtwSections),
-
-                          /// Featured Brand
-                          TSectionHeading(
-                              title: 'Featured Brands', onPressed: () {}),
-                          const SizedBox(height: TSizes.spaceBtwItems / 1.5),
-
-                          /// Brands Grid
-                          TGridLayout(
-                              itemCount: 4,
-                              mainAxisExtent: 80,
-                              itemBuilder: (_, index) {
-                                return TBrandCard(showBorder: false);
-                              }),
-                        ],
-                      ),
+    return Scaffold(
+      appBar: TAppBar(
+        title: Text('Inventory',
+            style: Theme.of(context).textTheme.headlineMedium),
+        actions: [
+          TCartCounterIcon(onPressed: () {}),
+        ],
+      ),
+      body: FutureBuilder<List<ProductModel>>(
+        future: _futureProducts,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return Center(child: Text('No products found'));
+          } else {
+            final products = snapshot.data!;
+            return SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(TSizes.defaultSpace),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const TSearchContainer(
+                      text: 'Search Products',
+                      showBorder: true,
+                      showBackground: true,
+                      padding: EdgeInsets.symmetric(
+                          vertical: TSizes.sm, horizontal: TSizes.md),
                     ),
+                    const SizedBox(height: TSizes.spaceBtwSections),
 
-                    /// Tabs
-                    bottom: TTabBar(
-                        tabs: categories
-                            .map((category) => Tab(child: Text(category.name)))
-                            .toList()),
-                  ),
-                ];
-              },
-              body: TabBarView(
-                  children: categories
-                      .map((category) => TCategoryTab(category: category))
-                      .toList()))),
+                    // Heading
+                    Text('All Products',
+                        style: Theme.of(context).textTheme.headlineSmall),
+                    const SizedBox(height: TSizes.spaceBtwItems),
+
+                    // Grid Layout of Products
+                    TGridLayout(
+                      itemCount: products.length,
+                      itemBuilder: (_, index) {
+                        final product = products[index];
+                        print("Product at index $index: ${product.toJson()}");
+                        return TProductCardVertical(product: product);
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            );
+          }
+        },
+      ),
     );
   }
 }
