@@ -144,8 +144,9 @@ class HomeScreen extends StatelessWidget {
 
                   /// Popular Product
                   Obx(() {
-                    if (controller.isLoading.value)
+                    if (controller.isLoading.value) {
                       return TVerticalProductShimmer();
+                    }
                     if (controller.featuredProducts.isEmpty) {
                       return Center(
                         child: Text('No Data Found',

@@ -148,7 +148,7 @@ class TProductCardVertical extends StatelessWidget {
     return GestureDetector(
       onTap: () => Get.to(() => ProductDetailScreen(product: product)),
       child: Container(
-        width: 180,
+        width: 180, // Check if this width fits within the screen
         padding: const EdgeInsets.all(1),
         decoration: BoxDecoration(
           boxShadow: [TShadowStyle.verticalProductShadow],
@@ -192,13 +192,17 @@ class TProductCardVertical extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 /// Stock Information (Replaced Price)
-                Padding(
-                  padding: const EdgeInsets.only(left: TSizes.sm),
-                  child: Text(
-                    'Stock: ${product.stock} items', // Use the stock from the product model
-                    style: const TextStyle(
-                      fontSize: 14,
-                      color: Colors.grey,
+                Flexible(
+                  // Add Flexible here
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: TSizes.sm),
+                    child: Text(
+                      'Stock: ${product.stock} items', // Use the stock from the product model
+                      style: const TextStyle(
+                        fontSize: 14,
+                        color: Colors.grey,
+                      ),
+                      overflow: TextOverflow.ellipsis, // Prevent overflow
                     ),
                   ),
                 ),

@@ -15,55 +15,35 @@ class ProductRepository extends GetxController {
   /// Firestore instance for database interactions
   final _db = FirebaseFirestore.instance;
 
-  /// Get limited feature products
-  Future<List<ProductModel>> getFeaturedProducts() async {
-    try {
-      final snapshot = await _db
-          .collection('Products')
-          .where('IsFeatured', isEqualTo: true)
-          .limit(4)
-          .get();
-      return snapshot.docs.map((e) => ProductModel.fromSnapshot(e)).toList();
-    } on FirebaseException catch (e) {
-      throw TFirebaseException(e.code).message;
-    } on PlatformException catch (e) {
-      throw TPlatformException(e.code).message;
-    } catch (e) {
-      throw 'Something went wrong. Please try again';
-    }
+  /// Get limited feature products as a Stream for real-time updates
+  Stream<List<ProductModel>> getFeaturedProductsStream() {
+    return _db
+        .collection('Products')
+        .where('IsFeatured', isEqualTo: true)
+        .snapshots()
+        .map((query) {
+      return query.docs.map((e) => ProductModel.fromSnapshot(e)).toList();
+    });
   }
 
   /// Upload dummy data to the Cloud Firebase
   Future<void> uploadDummyData(List<ProductModel> products) async {
     try {
-      /// Upload all the products along with their images
       final storage = Get.put(TFirebaseStorageService());
 
-      /// Loop through each product
       for (var product in products) {
-        /// Get image data link from local assets
         final thumbnail =
             await storage.getImageDataFromAssets(product.thumbnail);
-
-        /// Upload image and get its URL
         final url = await storage.uploadImageData(
             'Products/Images', thumbnail, product.thumbnail.toString());
-
-        /// Assign URL to product.thumbnail attribute
         product.thumbnail = url;
 
-        /// Product list of images
         if (product.images != null && product.images!.isEmpty) {
           List<String> imagesUrl = [];
           for (var image in product.images!) {
-            /// Get image data link from local assets
             final assetImage = await storage.getImageDataFromAssets(image);
-
-            /// Upload image and get its URL
             final url = await storage.uploadImageData(
                 'Products/Images', thumbnail, product.thumbnail.toString());
-
-            /// Assign URL to product.thumbnail attribute
             imagesUrl.add(url);
           }
           product.images!.clear();

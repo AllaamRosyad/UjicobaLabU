@@ -108,17 +108,21 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   void initState() {
     super.initState();
     _ledController.getLedStatus((status) {
-      setState(() {
-        _ledStatus = status;
-      });
+      if (mounted) {
+        setState(() {
+          _ledStatus = status;
+        });
+      }
     });
   }
 
   void _toggleLed(bool value) {
     _ledController.toggleLed(value, (status) {
-      setState(() {
-        _ledStatus = status;
-      });
+      if (mounted) {
+        setState(() {
+          _ledStatus = status;
+        });
+      }
     });
   }
 
@@ -134,7 +138,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           children: [
             /// Product Image
             TProductImage(
-              product: widget.product, // Correct way to access the product
+              product: widget.product,
             ),
 
             /// Product Details
